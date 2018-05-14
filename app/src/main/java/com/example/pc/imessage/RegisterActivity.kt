@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.activity_register.*
 import android.net.NetworkInfo
 import android.net.ConnectivityManager
 import android.content.Context.CONNECTIVITY_SERVICE
-
+import android.content.Intent
 
 
 class RegisterActivity : AppCompatActivity(){
@@ -48,13 +48,22 @@ class RegisterActivity : AppCompatActivity(){
                         }
 
                         override fun onDataChange(p0: DataSnapshot?) {
-                            ref.child("user3").setValue(userlist)
-                            Toast.makeText(this@RegisterActivity, "YOU HAVE BEEN REGISTERED!!!!!!", Toast.LENGTH_LONG).show()
-                        }
+                            var id = ref.push().key
+                            ref.child("id").setValue(userlist[0])
+                           Toast.makeText(this@RegisterActivity, "YOU HAVE BEEN REGISTERED!!!!!!", Toast.LENGTH_LONG).show()
 
+                        }
+//
                     })
+//                    var id = ref.push().key
+//                    var newuser = User(userName.text.toString(), email.text.toString(), phoneNum.text.toString(), pass.text.toString(), ConfirmPass.text.toString())
+//                    ref.child(id).setValue(newuser)
+//                    Toast.makeText(this@RegisterActivity, "YOU HAVE BEEN REGISTERED!!!"+newuser, Toast.LENGTH_LONG).show()
+//
                 }else
                     Toast.makeText(this@RegisterActivity, "There is no Connection!!!", Toast.LENGTH_LONG).show()
+                var intent: Intent = Intent(this@RegisterActivity, LoginActivity::class.java)
+                startActivity(intent)
             })
 
 

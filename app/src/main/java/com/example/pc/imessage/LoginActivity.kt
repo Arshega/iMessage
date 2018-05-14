@@ -59,30 +59,28 @@ class LoginActivity : AppCompatActivity() {
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
         mAuth = FirebaseAuth.getInstance();
         var ref: DatabaseReference = FirebaseDatabase.getInstance().getReference("User")
-        var email: EditText = findViewById(R.id.txtEmail)
-        var pass: EditText = findViewById(R.id.txtPass)
         var userRef = ref.child("user1").child("0")
-        SignIn.setOnClickListener(View.OnClickListener {
-
-            userRef.addValueEventListener(object : ValueEventListener {
-                override fun onCancelled(p0: DatabaseError?) {
-                    //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-                }
-
-                override fun onDataChange(p0: DataSnapshot?) {
-                    userEmail = p0?.child("email")?.value.toString()
-                    userPass = p0?.child("password")?.value.toString()
-                    email.text.toString()
-                    pass.text.toString()
-                    if (userEmail.equals(email)&&userPass.equals(pass)){
-                        val intent: Intent = Intent(this@LoginActivity, HomeActivity::class.java)
-                        startActivity(intent)
-                    }
-
-                }
-
-            })
-        })
+//        SignIn.setOnClickListener(View.OnClickListener {
+//
+//            userRef.addValueEventListener(object : ValueEventListener {
+//                override fun onCancelled(p0: DatabaseError?) {
+//                    //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+//                }
+//
+//                override fun onDataChange(p0: DataSnapshot?) {
+//                    userEmail = p0?.child("email")?.value.toString()
+//                    userPass = p0?.child("password")?.value.toString()
+//                    email.text.toString()
+//                    pass.text.toString()
+//                    if (userEmail.equals(email)&&userPass.equals(pass)){
+//                        val intent: Intent = Intent(this@LoginActivity, HomeActivity::class.java)
+//                        startActivity(intent)
+//                    }
+//
+//                }
+//
+//            })
+//        })
 
         create.setOnClickListener(View.OnClickListener {
             val intent: Intent = Intent(this@LoginActivity, RegisterActivity::class.java)
@@ -113,6 +111,12 @@ class LoginActivity : AppCompatActivity() {
             }
 
         }
+    }
+
+    public override fun onStart() {
+        super.onStart()
+        // Check if user is signed in (non-null) and update UI accordingly.
+        val currentUser = mAuth?.getCurrentUser()
     }
 
     private fun firebaseAuthWithGoogle(acct: GoogleSignInAccount) {
