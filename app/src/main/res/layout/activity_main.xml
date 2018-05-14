@@ -13,10 +13,12 @@
     <ImageView
         android:id="@+id/logo"
         android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="351dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/facebook"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -30,10 +32,10 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="36dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/editText2"
-        app:layout_constraintEnd_toStartOf="@+id/editText2"
+        app:layout_constraintBottom_toBottomOf="@+id/txtEmail"
+        app:layout_constraintEnd_toStartOf="@+id/txtEmail"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/editText2"
+        app:layout_constraintTop_toTopOf="@+id/txtEmail"
         app:srcCompat="@drawable/email" />
 
     <ImageView
@@ -44,55 +46,51 @@
         android:layout_marginEnd="20dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/editText"
-        app:layout_constraintEnd_toStartOf="@+id/editText"
+        app:layout_constraintBottom_toBottomOf="@+id/txtPass"
+        app:layout_constraintEnd_toStartOf="@+id/txtPass"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/editText"
+        app:layout_constraintTop_toTopOf="@+id/txtPass"
         app:srcCompat="@drawable/lock" />
 
-    <ImageView
+    <ImageButton
         android:id="@+id/facebook"
         android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="115dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
+        android:layout_height="49dp"
+        android:layout_marginBottom="37dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginStart="88dp"
+        android:background="#ffffff"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/twitter"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/create"
-        app:layout_constraintVertical_bias="0.571"
-        app:srcCompat="@drawable/facebook" />
+        app:layout_constraintTop_toBottomOf="@+id/logo"
+        app:srcCompat="@drawable/smallfacebook" />
 
-    <ImageView
+    <ImageButton
         android:id="@+id/twitter"
         android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_marginBottom="20dp"
-        android:layout_marginEnd="165dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="0dp"
+        android:layout_marginEnd="36dp"
+        android:background="#ffffff"
+        app:layout_constraintBottom_toBottomOf="@+id/facebook"
+        app:layout_constraintEnd_toStartOf="@+id/google"
         app:layout_constraintStart_toEndOf="@+id/facebook"
-        app:srcCompat="@drawable/twitter" />
+        app:layout_constraintTop_toTopOf="@+id/facebook"
+        app:srcCompat="@drawable/smalltwitter" />
 
-    <ImageView
+    <ImageButton
         android:id="@+id/google"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="37dp"
+        android:layout_marginEnd="84dp"
+        android:background="#ffffff"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/twitter"
-        app:layout_constraintTop_toBottomOf="@+id/create"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/google"
+        app:layout_constraintTop_toBottomOf="@+id/txtEmail"
+        app:srcCompat="@drawable/smallgoogle"
         tools:layout_editor_absoluteC="476dp" />
 
     <Button
@@ -110,7 +108,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/SignIn"
         android:layout_width="312dp"
         android:layout_height="53dp"
         android:layout_marginBottom="16dp"
@@ -136,7 +134,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/txtPass"
         android:layout_width="260dp"
         android:layout_height="49dp"
         android:layout_marginBottom="36dp"
@@ -145,23 +143,23 @@
         android:inputType="textPersonName"
         android:text="Password"
         android:textColor="#BDBDBD"
-        app:layout_constraintBottom_toTopOf="@+id/imageButton"
+        app:layout_constraintBottom_toTopOf="@+id/SignIn"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/txtEmail"
         android:layout_width="260dp"
-        android:layout_height="49dp"
-        android:layout_marginBottom="8dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="248dp"
         android:layout_marginEnd="36dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="185dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Email Address"
         android:textColor="#BDBDBD"
-        app:layout_constraintBottom_toTopOf="@+id/editText"
+        app:layout_constraintBottom_toTopOf="@+id/google"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logo"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.724" />
 
 

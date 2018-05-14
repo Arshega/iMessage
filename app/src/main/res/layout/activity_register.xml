@@ -17,8 +17,9 @@
         android:layout_marginStart="36dp"
         android:layout_marginTop="26dp"
         android:ems="10"
+        android:theme="@style/TextLabel"
         android:hint="Confirm Password"
-        android:inputType="textPersonName|textNoSuggestions"
+        android:inputType="textPassword|textNoSuggestions"
         android:textColor="#BDBDBD"
         android:textColorHint="#BDBDBD"
         app:layout_constraintBottom_toTopOf="@+id/btnCreateAcc"
@@ -34,6 +35,7 @@
         android:layout_marginEnd="36dp"
         android:layout_marginStart="36dp"
         android:ems="10"
+        android:theme="@style/TextLabel"
         android:hint="Password"
         android:textColorHint="#BDBDBD"
         android:inputType="textPassword"
@@ -96,6 +98,7 @@
         android:layout_width="0dp"
         android:layout_height="43dp"
         android:layout_marginBottom="149dp"
+        android:theme="@style/TextLabel"
         android:layout_marginEnd="36dp"
         android:layout_marginStart="36dp"
         android:layout_marginTop="149dp"
@@ -117,6 +120,7 @@
         android:layout_marginBottom="72dp"
         android:layout_marginEnd="36dp"
         android:layout_marginStart="36dp"
+        android:theme="@style/TextLabel"
         android:layout_marginTop="76dp"
         android:ems="10"
         android:textColorHint="#BDBDBD"
@@ -134,7 +138,6 @@
         android:layout_width="0dp"
         android:layout_height="46dp"
         android:layout_marginBottom="61dp"
-        android:textColorHint="#BDBDBD"
         android:layout_marginEnd="36dp"
         android:layout_marginStart="36dp"
         android:layout_marginTop="63dp"
@@ -142,10 +145,14 @@
         android:hint="Username"
         android:inputType="textPersonName|textNoSuggestions"
         android:textColor="#BDBDBD"
+        android:textColorHint="#BDBDBD"
+        android:theme="@style/TextLabel"
 
         app:layout_constraintBottom_toBottomOf="@+id/editEmail"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="1.0" />
 
 </android.support.constraint.ConstraintLayout>
