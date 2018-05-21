@@ -20,7 +20,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo" />
+        />
 
     <ImageView
         android:id="@+id/email"
@@ -33,7 +33,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/input_layout_email"
         app:layout_constraintVertical_bias="0.545"
-        app:srcCompat="@drawable/email" />
+         />
 
     <ImageView
         android:id="@+id/password"
@@ -46,7 +46,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/input_layout_password"
         app:layout_constraintVertical_bias="0.555"
-        app:srcCompat="@drawable/lock" />
+        />
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/input_layout_email"
@@ -106,7 +106,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/create"
         app:layout_constraintVertical_bias="0.571"
-        app:srcCompat="@drawable/facebook" />
+         />
 
     <ImageView
         android:id="@+id/twitter"
@@ -117,7 +117,7 @@
         app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/facebook"
-        app:srcCompat="@drawable/twitter" />
+        />
 
     <ImageView
         android:id="@+id/google"
@@ -133,7 +133,7 @@
         app:layout_constraintStart_toEndOf="@+id/twitter"
         app:layout_constraintTop_toBottomOf="@+id/create"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/google"
+
         tools:layout_editor_absoluteC="476dp" />
 
     <Button
@@ -164,7 +164,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/input_layout_password"
         app:layout_constraintVertical_bias="0.666"
-        app:srcCompat="@drawable/smallarrow" />
+ />
 
     <TextView
         android:id="@+id/textView"

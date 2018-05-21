@@ -22,7 +22,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo" />
+      />
 
     <ImageView
         android:id="@+id/email"
@@ -36,7 +36,7 @@
         app:layout_constraintEnd_toStartOf="@+id/txtEmail"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/txtEmail"
-        app:srcCompat="@drawable/email" />
+      />
 
     <ImageView
         android:id="@+id/password"
@@ -51,7 +51,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/txtPass"
-        app:srcCompat="@drawable/lock" />
+       />
 
     <ImageButton
         android:id="@+id/facebook"
@@ -65,7 +65,7 @@
         app:layout_constraintEnd_toStartOf="@+id/twitter"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logo"
-        app:srcCompat="@drawable/smallfacebook" />
+        />
 
     <ImageButton
         android:id="@+id/twitter"
@@ -77,7 +77,7 @@
         app:layout_constraintEnd_toStartOf="@+id/google"
         app:layout_constraintStart_toEndOf="@+id/facebook"
         app:layout_constraintTop_toTopOf="@+id/facebook"
-        app:srcCompat="@drawable/smalltwitter" />
+   />
 
     <ImageButton
         android:id="@+id/google"
@@ -90,7 +90,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/twitter"
         app:layout_constraintTop_toBottomOf="@+id/txtEmail"
-        app:srcCompat="@drawable/smallgoogle"
+
         tools:layout_editor_absoluteC="476dp" />
 
     <Button
@@ -118,7 +118,7 @@
         app:layout_constraintBottom_toTopOf="@+id/create"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/smallarrow" />
+        />
 
     <TextView
         android:id="@+id/textView"

@@ -16,6 +16,9 @@ import android.net.NetworkInfo
 import android.net.ConnectivityManager
 import android.content.Context.CONNECTIVITY_SERVICE
 import android.content.Intent
+import com.google.firebase.firestore.FirebaseFirestore
+import java.util.*
+import kotlin.collections.HashMap
 
 
 class RegisterActivity : AppCompatActivity(){
@@ -23,6 +26,8 @@ class RegisterActivity : AppCompatActivity(){
         lateinit var database: FirebaseDatabase
         private var userlist: MutableList<User> = arrayListOf()
         lateinit var user: User
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
@@ -34,32 +39,25 @@ class RegisterActivity : AppCompatActivity(){
         val ConfirmPass:EditText = findViewById(R.id.editConfirmPassword)
         val btnCreate: Button = findViewById(R.id.btnCreateAcc)
         var connected = false
+       val db = FirebaseFirestore.getInstance()
         val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         database = FirebaseDatabase.getInstance()
-        ref = database.getReference("User")
+        ref = database.getReference("Users")
         connected = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).state == NetworkInfo.State.CONNECTED || connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).state == NetworkInfo.State.CONNECTED
+
+        var nuser :HashMap<String,Any> ? = HashMap()
 
             btnCreate.setOnClickListener(View.OnClickListener {
                 if (connected==true) {
-                    userlist.add(User(userName.text.toString(), email.text.toString(), phoneNum.text.toString(), pass.text.toString(), ConfirmPass.text.toString()))
-                    ref.addValueEventListener(object : ValueEventListener {
-                        override fun onCancelled(p0: DatabaseError?) {
-                            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-                        }
+                    user = (User(userName.text.toString(), email.text.toString(), phoneNum.text.toString(), pass.text.toString(), ConfirmPass.text.toString()))
 
-                        override fun onDataChange(p0: DataSnapshot?) {
-                            var id = ref.push().key
-                            ref.child("id").setValue(userlist[0])
-                           Toast.makeText(this@RegisterActivity, "YOU HAVE BEEN REGISTERED!!!!!!", Toast.LENGTH_LONG).show()
+                    nuser!!.put("Username" ,user.userName)
+                    nuser!!.put("Password" ,user.password)
+                    nuser!!.put("Email" ,user.email)
+                    nuser!!.put("PhoneNum" ,user.phoneNum)
 
-                        }
-//
-                    })
-//                    var id = ref.push().key
-//                    var newuser = User(userName.text.toString(), email.text.toString(), phoneNum.text.toString(), pass.text.toString(), ConfirmPass.text.toString())
-//                    ref.child(id).setValue(newuser)
-//                    Toast.makeText(this@RegisterActivity, "YOU HAVE BEEN REGISTERED!!!"+newuser, Toast.LENGTH_LONG).show()
-//
+                    db.collection("Users").add(nuser)
+
                 }else
                     Toast.makeText(this@RegisterActivity, "There is no Connection!!!", Toast.LENGTH_LONG).show()
                 var intent: Intent = Intent(this@RegisterActivity, LoginActivity::class.java)

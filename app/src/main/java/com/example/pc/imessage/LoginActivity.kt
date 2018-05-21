@@ -34,6 +34,8 @@ import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 import com.google.android.gms.common.api.Result
 import com.google.firebase.database.*
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.QuerySnapshot
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 import javax.security.auth.callback.Callback
@@ -42,13 +44,19 @@ import javax.security.auth.callback.Callback
 class LoginActivity : AppCompatActivity() {
     private var RC_SIGN_IN = 101
     var TAG = "error"
+
+    private var em = ""  // email
+    private var pa = ""  /// password
+    private var purl = ""  // photo url
+    private var pass :EditText? = null
+    private var email : EditText? = null
     private var mAuth: FirebaseAuth? = null
     private lateinit var mGoogleSignInClient: GoogleSignInClient
-    private  var userEmail: String = ""
-    private  var userPass: String =""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+  this.pass = findViewById(R.id.txtPass)
+        this.email = findViewById(R.id.txtEmail)
 
 
         // Configure Google Sign In
@@ -58,32 +66,17 @@ class LoginActivity : AppCompatActivity() {
                 .build()
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
         mAuth = FirebaseAuth.getInstance();
-        var ref: DatabaseReference = FirebaseDatabase.getInstance().getReference("User")
-        var userRef = ref.child("user1").child("0")
-//        SignIn.setOnClickListener(View.OnClickListener {
-//
-//            userRef.addValueEventListener(object : ValueEventListener {
-//                override fun onCancelled(p0: DatabaseError?) {
-//                    //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-//                }
-//
-//                override fun onDataChange(p0: DataSnapshot?) {
-//                    userEmail = p0?.child("email")?.value.toString()
-//                    userPass = p0?.child("password")?.value.toString()
-//                    email.text.toString()
-//                    pass.text.toString()
-//                    if (userEmail.equals(email)&&userPass.equals(pass)){
-//                        val intent: Intent = Intent(this@LoginActivity, HomeActivity::class.java)
-//                        startActivity(intent)
-//                    }
-//
-//                }
-//
-//            })
-//        })
+
+
+   SignIn.setOnClickListener({
+signIn()
+//firestore_getData()
+           })
+
 
         create.setOnClickListener(View.OnClickListener {
             val intent: Intent = Intent(this@LoginActivity, RegisterActivity::class.java)
+
             startActivity(intent)
         })
 
@@ -94,7 +87,10 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun signIn() {
+
         val signInIntent = mGoogleSignInClient.getSignInIntent()
+
+
         startActivityForResult(signInIntent, RC_SIGN_IN)
     }
 
@@ -105,6 +101,11 @@ class LoginActivity : AppCompatActivity() {
             try {
                 // Google Sign In was successful, authenticate with Firebase
                 val account = task.getResult(ApiException::class.java)
+
+                this.em = account.email!!.toString()
+                this.pa = account.account!!.toString()
+                this.purl = account.photoUrl!!.toString()
+                firestore_addData()
                 firebaseAuthWithGoogle(account)
             } catch (e: ApiException) {
                 Toast.makeText(this@LoginActivity, "Login Failed", Toast.LENGTH_LONG).show()
@@ -138,4 +139,44 @@ class LoginActivity : AppCompatActivity() {
                 })
     }
 
+
+    fun firestore_addData(){
+var user: HashMap<String,Any> = HashMap()
+        val db = FirebaseFirestore.getInstance()
+        user.put("Email",em)
+        user.put("Photo_Url",purl)
+        db.collection("Users")
+    }
+
+
+    fun firestore_getData(){
+
+
+
+        val db = FirebaseFirestore.getInstance()
+        db.collection("Users")
+                .get()
+                .addOnCompleteListener(object : OnCompleteListener<QuerySnapshot>{
+                    override fun onComplete(p0: Task<QuerySnapshot>) {
+                        if(p0.isSuccessful()){
+                            for (document in p0.result) {
+                                if(document["Email"].toString() == email!!.text.toString() &&
+                                        document["Password"].toString() ==  pass!!.text.toString()){
+
+                                    //Intent to  Home
+                                    val intent: Intent = Intent(this@LoginActivity, HomeActivity::class.java)
+                                    intent.putExtra("email",email!!.text.toString())
+                                    intent.putExtra("pass",pass!!.text.toString())
+
+
+
+                                }
+                            }
+
+                        }
+                    }
+
+
+                })
+    }
 }
