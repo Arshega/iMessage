@@ -41,20 +41,20 @@ class RegisterActivity : AppCompatActivity(){
         var connected = false
        val db = FirebaseFirestore.getInstance()
         val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        database = FirebaseDatabase.getInstance()
-        ref = database.getReference("Users")
         connected = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).state == NetworkInfo.State.CONNECTED || connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).state == NetworkInfo.State.CONNECTED
 
         var nuser :HashMap<String,Any> ? = HashMap()
 
             btnCreate.setOnClickListener(View.OnClickListener {
                 if (connected==true) {
-                    user = (User(userName.text.toString(), email.text.toString(), phoneNum.text.toString(), pass.text.toString(), ConfirmPass.text.toString()))
-
+                    user = (User(userName.text.toString(), email.text.toString(), phoneNum.text.toString(), pass.text.toString(), ConfirmPass.text.toString()
+                    ,""))
+                   var users : MutableList<Contacts> = ArrayList()
                     nuser!!.put("Username" ,user.userName)
                     nuser!!.put("Password" ,user.password)
                     nuser!!.put("Email" ,user.email)
                     nuser!!.put("PhoneNum" ,user.phoneNum)
+                    nuser!!.put("contact",users)
 
                     db.collection("Users").add(nuser)
 

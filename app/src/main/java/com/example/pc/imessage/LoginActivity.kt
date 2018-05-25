@@ -26,6 +26,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.Toast
+import com.example.pc.imessage.FirestoreDatabase.Google_Actions
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.GoogleAuthProvider
@@ -34,6 +35,7 @@ import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 import com.google.android.gms.common.api.Result
 import com.google.firebase.database.*
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
 import java.security.MessageDigest
@@ -44,18 +46,18 @@ import javax.security.auth.callback.Callback
 class LoginActivity : AppCompatActivity() {
     private var RC_SIGN_IN = 101
     var TAG = "error"
-
+    private var listofContact : ArrayList<String> = ArrayList()
     private var em = ""  // email
     private var pa = ""  /// password
     private var purl = ""  // photo url
-    private var pass :EditText? = null
-    private var email : EditText? = null
+    private var pass: EditText? = null
+    private var email: EditText? = null
     private var mAuth: FirebaseAuth? = null
     private lateinit var mGoogleSignInClient: GoogleSignInClient
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-  this.pass = findViewById(R.id.txtPass)
+        this.pass = findViewById(R.id.txtPass)
         this.email = findViewById(R.id.txtEmail)
 
 
@@ -68,10 +70,10 @@ class LoginActivity : AppCompatActivity() {
         mAuth = FirebaseAuth.getInstance();
 
 
-   SignIn.setOnClickListener({
-signIn()
-//firestore_getData()
-           })
+        SignIn.setOnClickListener({
+            signIn()
+            firestore_getData()
+        })
 
 
         create.setOnClickListener(View.OnClickListener {
@@ -88,10 +90,10 @@ signIn()
 
     private fun signIn() {
 
-        val signInIntent = mGoogleSignInClient.getSignInIntent()
+        //val signInIntent = mGoogleSignInClient.getSignInIntent()
 
-
-        startActivityForResult(signInIntent, RC_SIGN_IN)
+firestore_getData()
+        //startActivityForResult(signInIntent, RC_SIGN_IN)
     }
 
     public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
@@ -105,9 +107,14 @@ signIn()
                 this.em = account.email!!.toString()
                 this.pa = account.account!!.toString()
                 this.purl = account.photoUrl!!.toString()
+                Toast.makeText(this@LoginActivity, this.em + this.pa + this.purl, Toast.LENGTH_LONG).show()
                 firestore_addData()
-                firebaseAuthWithGoogle(account)
+                Google_Actions().firebaseAuthWithGoogle(account, this@LoginActivity)
+
+
             } catch (e: ApiException) {
+
+                firestore_getData()
                 Toast.makeText(this@LoginActivity, "Login Failed", Toast.LENGTH_LONG).show()
             }
 
@@ -120,57 +127,44 @@ signIn()
         val currentUser = mAuth?.getCurrentUser()
     }
 
-    private fun firebaseAuthWithGoogle(acct: GoogleSignInAccount) {
-        val credential = GoogleAuthProvider.getCredential(acct.idToken, null)
-        mAuth?.signInWithCredential(credential)
-                ?.addOnCompleteListener(this, object : OnCompleteListener<AuthResult> {
-                    override fun onComplete(task: Task<AuthResult>) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            val user = mAuth?.getCurrentUser()
-                            val intent: Intent = Intent(this@LoginActivity, HomeActivity::class.java)
-                            startActivity(intent)
-                            finish()
-                            Toast.makeText(this@LoginActivity, "Login Successful", Toast.LENGTH_LONG).show()
-                        } else {
 
-                        }
-                    }
-                })
-    }
-
-
-    fun firestore_addData(){
-var user: HashMap<String,Any> = HashMap()
+    fun firestore_addData() {
+        var user: HashMap<String, Any> = HashMap()
         val db = FirebaseFirestore.getInstance()
-        user.put("Email",em)
-        user.put("Photo_Url",purl)
+        user.put("Email", em)
+        user.put("Photo_Url", purl)
         db.collection("Users")
     }
 
 
-    fun firestore_getData(){
-
+    fun firestore_getData() {
 
 
         val db = FirebaseFirestore.getInstance()
         db.collection("Users")
+
                 .get()
-                .addOnCompleteListener(object : OnCompleteListener<QuerySnapshot>{
+                .addOnCompleteListener(object : OnCompleteListener<QuerySnapshot> {
                     override fun onComplete(p0: Task<QuerySnapshot>) {
-                        if(p0.isSuccessful()){
+
+                        if (p0.isSuccessful()) {
                             for (document in p0.result) {
-                                if(document["Email"].toString() == email!!.text.toString() &&
-                                        document["Password"].toString() ==  pass!!.text.toString()){
+                                if (document["Email"].toString() == email!!.text.toString() &&
+                                        document["Password"].toString() == pass!!.text.toString()
+                                ) {
 
                                     //Intent to  Home
-                                    val intent: Intent = Intent(this@LoginActivity, HomeActivity::class.java)
-                                    intent.putExtra("email",email!!.text.toString())
-                                    intent.putExtra("pass",pass!!.text.toString())
-
+                                    val intent: Intent = Intent(this@LoginActivity, ContactList::class.java)
+                                    intent.putExtra("email", email!!.text.toString())
+                                    intent.putExtra("pass", pass!!.text.toString())
+                                    intent.putExtra("id",document.id)
+                                    //  Toast.makeText(this@LoginActivity, document["Contact"].toString(), Toast.LENGTH_LONG).show()
+                                    startActivity(intent)
 
 
                                 }
+
+
                             }
 
                         }
@@ -178,5 +172,8 @@ var user: HashMap<String,Any> = HashMap()
 
 
                 })
+
+
+
     }
 }
