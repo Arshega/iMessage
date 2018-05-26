@@ -19,15 +19,16 @@ class AdapterHolder(list: ArrayList<Contacts>, context: Context) : RecyclerView.
     var mContext = context
     override fun onBindViewHolder(holder: ContactHolder, position: Int) {
 
-        Toast.makeText(mContext.applicationContext, data[position].Email, Toast.LENGTH_LONG).show()
+
         holder!!.email.text = data[position].Email
-        holder!!.fullname.text = data[position].Name
+        holder!!.fullname.text = data[position].Username
 
         holder.click.setOnClickListener {
         var intent = Intent(mContext.applicationContext, MessagingActivity::class.java)
             intent.putExtra("email",data[position].Email)
             intent.putExtra("myemail",data[position].myemail)
             intent.putExtra("id",data[position].myid)
+            intent.putExtra("name",data[position].myname)
             v!!.context.startActivity(intent)
         }
 

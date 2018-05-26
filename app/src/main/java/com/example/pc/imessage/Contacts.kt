@@ -4,8 +4,9 @@ import java.util.ArrayList
 
 class Contacts(email:String,name:String) {
     var Email= email
-    var Name =name
+    var Username =name
     var myid=""
     var myemail=""
+    var myname=""
     constructor() : this("","")
 }

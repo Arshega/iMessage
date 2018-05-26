@@ -43,6 +43,7 @@ class ContactList : AppCompatActivity() {
         showFragmentParent()
         bundle.putString("myemail",b.getString("email"))
         bundle.putString("value", b.getString("id"))
+        bundle.putString("name",b.getString("name"))
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
     }
 

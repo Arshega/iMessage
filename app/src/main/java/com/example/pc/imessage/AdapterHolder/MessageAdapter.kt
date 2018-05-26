@@ -23,7 +23,7 @@ class MessageAdapter(list: ArrayList<TheMessage>, context: Context) : RecyclerVi
             holder!!.sender.visibility = View.INVISIBLE
         } else {
             holder!!.rmessage.text = data[position].Messages
-            holder!!.sender.text = data[position].Sender
+            holder!!.sender.text = data[position].SenderName
             holder!!.message.visibility = View.INVISIBLE
         }
     }

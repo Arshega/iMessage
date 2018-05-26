@@ -157,8 +157,11 @@ firestore_getData()
                                     val intent: Intent = Intent(this@LoginActivity, ContactList::class.java)
                                     intent.putExtra("email", email!!.text.toString())
                                     intent.putExtra("pass", pass!!.text.toString())
+
+                                    var x = document["Username"].toString()
+                                    intent.putExtra("name",x)
                                     intent.putExtra("id",document.id)
-                                    //  Toast.makeText(this@LoginActivity, document["Contact"].toString(), Toast.LENGTH_LONG).show()
+                                      Toast.makeText(this@LoginActivity, "Welcome " + x, Toast.LENGTH_LONG).show()
                                     startActivity(intent)
 
 

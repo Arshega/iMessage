@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
+import android.widget.TextView
 import android.widget.Toast
 import com.example.pc.imessage.AdapterHolder.MessageAdapter
 import com.example.pc.imessage.R
@@ -15,6 +16,8 @@ class MessagingActivity : AppCompatActivity() {
     var id = ""
     var myemail = ""
     var email = ""
+    var name = ""
+    var nameview: TextView? = null
     var adapter: MessageAdapter? = null
     var account = Account()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,8 +29,11 @@ class MessagingActivity : AppCompatActivity() {
         email = b.getString("email")
         myemail = b.getString("myemail")
         id = b.getString("id")
+        name = b.getString("name")
         var db = FirebaseFirestore.getInstance()
+        nameview = findViewById(R.id.UserName)
 
+        nameview!!.text = name
         Toast.makeText(applicationContext, email + "+" + myemail, Toast.LENGTH_LONG).show()
 
 
@@ -35,7 +41,7 @@ class MessagingActivity : AppCompatActivity() {
         db.collection("Session")
                 .document(email + "+" + myemail)
                 .collection("Message")
-                .orderBy("TimeStamp",Query.Direction.ASCENDING)
+                .orderBy("TimeStamp", Query.Direction.ASCENDING)
 
                 .addSnapshotListener(object : EventListener<QuerySnapshot> {
 
@@ -52,8 +58,6 @@ class MessagingActivity : AppCompatActivity() {
                         }
                         for (doc in p0!!.documents) {
                             //Toast.makeText(applicationContext, doc.get("contact").toString(),Toast.LENGTH_LONG).show()
-
-
 
 
                             var user = doc.toObject(TheMessage::class.java)
@@ -84,6 +88,7 @@ class MessagingActivity : AppCompatActivity() {
             var message: ArrayList<TheMessage> = ArrayList()
             mbox!!.put("Messages", editText!!.text.toString())
             mbox!!.put("Sender", myemail)
+            mbox!!.put("SenderName",name)
             mbox!!.put("Reciever", email)
             mbox!!.put("TimeStamp", timeStamp().getCurrentTime())
 

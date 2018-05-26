@@ -24,7 +24,7 @@ import kotlinx.android.synthetic.main.contact_list.*
 
 class Fragment_Contact : Fragment() {
     var id = ""
-
+    var name = ""
     var email = ""
     var adapter: AdapterHolder? = null
     var account = Account()
@@ -49,6 +49,7 @@ class Fragment_Contact : Fragment() {
 
         id = this.arguments!!.getString("value")
         email = this.arguments!!.getString("myemail")
+        name = this.arguments!!.getString("name")
         theid = id
         if (!id.equals("")) {
 
@@ -72,12 +73,16 @@ class Fragment_Contact : Fragment() {
 
                                             user.myid = id
                                             user.myemail = email
+                                            user.myname = name
                                             con.add(user)
                                             adapter = AdapterHolder(con, activity!!.applicationContext)
                                             var layout_manager = LinearLayoutManager(activity!!.applicationContext)
+                                            layout_manager.reverseLayout = false
                                             recycler.layoutManager = layout_manager
                                             recycler.setHasFixedSize(true)
+
                                             recycler.adapter = adapter
+
                                             adapter!!.notifyDataSetChanged()
                                         }
                                     }
