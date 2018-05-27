@@ -17,6 +17,7 @@ class MessagingActivity : AppCompatActivity() {
     var myemail = ""
     var email = ""
     var name = ""
+    var thisid = ""
     var nameview: TextView? = null
     var adapter: MessageAdapter? = null
     var account = Account()
@@ -28,6 +29,7 @@ class MessagingActivity : AppCompatActivity() {
         var b: Bundle = iin.extras
         email = b.getString("email")
         myemail = b.getString("myemail")
+        thisid=b.getString("thisid")
         id = b.getString("id")
         name = b.getString("name")
         var db = FirebaseFirestore.getInstance()
@@ -96,7 +98,8 @@ class MessagingActivity : AppCompatActivity() {
 
             sendb.collection("Session").document(myemail + "+" + email).collection("Message").add(mbox)
             sendb.collection("Session").document(email + "+" + myemail).collection("Message").add(mbox)
-
+            sendb.collection("Users").document(id).collection("Inbox").add(mbox)
+            sendb.collection("Users").document(thisid).collection("Inbox").add(mbox)
 
 
 

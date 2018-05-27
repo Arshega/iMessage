@@ -74,6 +74,7 @@ class Fragment_Contact : Fragment() {
                                             user.myid = id
                                             user.myemail = email
                                             user.myname = name
+                                            user.userid = doc.id
                                             con.add(user)
                                             adapter = AdapterHolder(con, activity!!.applicationContext)
                                             var layout_manager = LinearLayoutManager(activity!!.applicationContext)

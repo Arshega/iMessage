@@ -8,5 +8,6 @@ class Contacts(email:String,name:String) {
     var myid=""
     var myemail=""
     var myname=""
+    var userid=""
     constructor() : this("","")
 }

@@ -28,6 +28,7 @@ class AdapterHolder(list: ArrayList<Contacts>, context: Context) : RecyclerView.
             intent.putExtra("email",data[position].Email)
             intent.putExtra("myemail",data[position].myemail)
             intent.putExtra("id",data[position].myid)
+            intent.putExtra("thisid",data[position].userid)
             intent.putExtra("name",data[position].Username)
             v!!.context.startActivity(intent)
         }

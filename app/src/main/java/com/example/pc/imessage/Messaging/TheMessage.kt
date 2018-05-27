@@ -1,6 +1,8 @@
 package com.example.pc.imessage.Messaging
 
-class TheMessage(Messages: String, Receiver: String, Sender: String,SenderName: String) {
+import java.util.*
+
+class TheMessage(Messages: String, Receiver: String, Sender: String,SenderName: String,TimeStamp:Date) {
 
     var Messages = Messages
 
@@ -8,7 +10,9 @@ class TheMessage(Messages: String, Receiver: String, Sender: String,SenderName: 
     var Sender = Sender
     var myemail = ""
     var SenderName = SenderName
+    var TimeStamp= TimeStamp
+    var countOfMsgs = 0
 
 
-    constructor() : this("", "", "","")
+    constructor() : this("", "", "","",Date())
 }

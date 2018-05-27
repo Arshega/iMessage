@@ -17,7 +17,7 @@ class ContactList : AppCompatActivity() {
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.messaging -> {
-
+           showFragmentMessage()
                 return@OnNavigationItemSelectedListener true
             }
             R.id.contacs -> {
