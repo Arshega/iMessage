@@ -3,7 +3,7 @@ package com.example.pc.imessage.FirestoreDatabase
 import android.content.Context
 import android.content.Intent
 import android.widget.Toast
-import com.example.pc.imessage.HomeActivity
+import com.example.pc.imessage.ContactList
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
@@ -23,7 +23,7 @@ class Google_Actions {
                 if (task.isSuccessful()) {
                     // Sign in success, update UI with the signed-in user's information
                     val user = mAuth?.getCurrentUser()
-                    val intent: Intent = Intent(context.applicationContext, HomeActivity::class.java)
+                    val intent: Intent = Intent(context.applicationContext, ContactList::class.java)
                     context.startActivity(intent)
 
                     Toast.makeText(context.applicationContext, "Login Successful", Toast.LENGTH_LONG).show()

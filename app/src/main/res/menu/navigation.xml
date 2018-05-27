@@ -1,23 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:id="@+id/contacs"
+        app:showAsAction="withText"
+        android:iconTint="#00A8FE"
         android:icon="@drawable/contacts"
         android:title="Contacts" />
 
     <item
         android:id="@+id/messaging"
+        app:showAsAction="withText"
+        android:iconTint="#00A8FE"
         android:icon="@drawable/message"
         android:title="Messaging" />
 
     <item
         android:id="@+id/profile"
+        android:iconTint="#00A8FE"
+        app:showAsAction="withText"
         android:icon="@drawable/profile"
         android:title="Profile" />
 
     <item
         android:id="@+id/settings"
+        app:showAsAction="withText"
+        android:iconTint="#00A8FE"
         android:icon="@drawable/settings"
         android:title="Settings" />
 

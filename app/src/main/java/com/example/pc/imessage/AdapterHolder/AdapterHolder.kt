@@ -12,6 +12,9 @@ import android.widget.TextView
 import android.widget.Toast
 import com.example.pc.imessage.*
 import com.example.pc.imessage.Messaging.MessagingActivity
+import android.content.ClipData.Item
+
+
 
 class AdapterHolder(list: ArrayList<Contacts>, context: Context) : RecyclerView.Adapter<AdapterHolder.ContactHolder>() {
     var v: View? = null
@@ -44,6 +47,12 @@ class AdapterHolder(list: ArrayList<Contacts>, context: Context) : RecyclerView.
 
     override fun getItemCount(): Int {
         return data.size
+    }
+
+    fun setfilter(listitem: List<Contacts>) {
+        data = ArrayList()
+        data.addAll(listitem)
+        notifyDataSetChanged()
     }
 
 

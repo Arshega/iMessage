@@ -13,23 +13,24 @@
 
     <ImageView
         android:id="@+id/logo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
         android:layout_gravity="center"
         android:layout_marginTop="26dp"
         app:srcCompat="@drawable/logo" />
 
 
     <EditText
+        android:layout_marginTop="40dp"
         android:id="@+id/txtEmail"
         android:layout_width="260dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-
+        android:textColorHint="#BDBDBD"
         android:hint="Email Address"
+        android:backgroundTint="#BDBDBD"
         android:inputType="textEmailAddress"
         android:textAlignment="center"
-
         android:textColor="#BDBDBD" />
 
     <EditText
@@ -38,67 +39,26 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="36dp"
-
         android:hint="Password"
-
+        android:backgroundTint="#BDBDBD"
+        android:textColorHint="#BDBDBD"
+        android:layout_marginTop="20dp"
         android:inputType="textPassword"
         android:textAlignment="center"
         android:textColor="#BDBDBD" />
 
-    <LinearLayout
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:orientation="horizontal">
-
-        <ImageButton
-            android:id="@+id/facebook"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="#ffffff"
-
-            app:srcCompat="@drawable/facebook"
-
-            />
-
-        <ImageButton
-            android:id="@+id/twitter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="#ffffff"
-android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp"
-            app:srcCompat="@drawable/twitter"
-
-            />
-
-        <ImageButton
-            android:id="@+id/google"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:layout_weight="1"
-
-            android:background="#ffffff"
-            app:srcCompat="@drawable/google"
-
-            />
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/SignIn"
-        android:layout_width="312dp"
-        android:layout_height="53dp"
-        android:layout_gravity="center"
-
-        android:background="@drawable/roundbutton"
-
-        />
+    <ImageButton
+    android:id="@+id/SignIn"
+    android:layout_width="312dp"
+    android:layout_height="53dp"
+    android:layout_gravity="center"
+    android:background="@drawable/roundbutton"
+        android:src="@drawable/smallarrow"
+    />
 
     <Button
         android:id="@+id/create"
+        android:layout_marginTop="10dp"
         android:layout_width="312dp"
         android:layout_height="53dp"
         android:layout_gravity="center"
@@ -106,8 +66,47 @@ android:layout_marginRight="10dp"
         android:text="Create Account"
         android:textColor="#00A8FE" />
 
+    <LinearLayout
+        android:layout_marginTop="30dp"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/facebook"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:background="#ffffff"
+            app:srcCompat="@drawable/smallfacebook"
+            />
+
+        <ImageButton
+            android:id="@+id/twitter"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:background="#ffffff"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            app:srcCompat="@drawable/smalltwitter"
+
+            />
+
+        <ImageButton
+            android:id="@+id/google"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:background="#ffffff"
+            app:srcCompat="@drawable/smallgoogle"
+
+            />
+    </LinearLayout>
 
     <TextView
+        android:layout_marginTop="20dp"
         android:id="@+id/textView"
         android:layout_width="117dp"
         android:layout_height="17dp"
