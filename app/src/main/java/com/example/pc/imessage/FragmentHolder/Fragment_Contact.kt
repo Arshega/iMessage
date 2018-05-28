@@ -71,8 +71,6 @@ class Fragment_Contact : Fragment(), SearchView.OnQueryTextListener {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-
-
         id = this.arguments!!.getString("value")
         email = this.arguments!!.getString("myemail")
         name = this.arguments!!.getString("name")

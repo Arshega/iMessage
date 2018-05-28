@@ -75,6 +75,7 @@ class MessagingActivity : AppCompatActivity() {
 
                         var layout_manager = LinearLayoutManager(applicationContext)
                         viewR.layoutManager = layout_manager
+                        viewR.recycledViewPool.setMaxRecycledViews(0,0)
                         viewR.setHasFixedSize(true)
                         viewR.adapter = adapter
 

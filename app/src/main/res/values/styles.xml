@@ -24,5 +24,9 @@
         <item name="colorControlActivated">@color/colorPrimaryDark</item>
     </style>
 
+    <style name="FacebookLoginButton">
+        <item name="android:background">@drawable/smallfacebook</item>
+    </style>
+
 
 </resources>
