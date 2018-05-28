@@ -45,6 +45,11 @@ class RegisterActivity : AppCompatActivity(){
 
         var nuser :HashMap<String,Any> ? = HashMap()
 
+            signIn.setOnClickListener(View.OnClickListener {
+                var intent: Intent = Intent(this@RegisterActivity, LoginActivity::class.java)
+                startActivity(intent)
+            })
+
             btnCreate.setOnClickListener(View.OnClickListener {
                 if (connected==true) {
                     user = (User(userName.text.toString(), email.text.toString(), phoneNum.text.toString(), pass.text.toString(), ConfirmPass.text.toString()
