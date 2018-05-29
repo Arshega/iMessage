@@ -235,6 +235,8 @@ firestore_getData()
 
 
                                 }
+                                else
+                                    Toast.makeText(this@LoginActivity, "Account Does not Exist!", Toast.LENGTH_LONG).show()
 
 
                             }
