@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/tools">
     <string name="app_name">iMessage</string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="title_home">Home</string>
@@ -6,6 +6,15 @@
     <string name="title_notifications">Notifications</string>
     <string name="title_activity_contact_list">ContactList</string>
     <string name="title_activity_home2">Contacs</string>
+
     <string name="facebook_app_id">1179405085528854</string>
     <string name="fb_login_protocol_scheme">fb1179405085528854</string>
+
+    <string name="tv_show">SHOW</string>
+    <string name="tv_show2">SHOW</string>
+
+    <string name="com.twitter.sdk.android.CONSUMER_KEY">
+ZF7t8sMPg9lLorWIP4yo9iohO</string>
+    <string name="com.twitter.sdk.android.CONSUMER_SECRET">
+hqzul4LWULnEZaCddpT3P1sZEbnszNiZN9NO7f2o5WDrRdJt9H</string>
 </resources>

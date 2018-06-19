@@ -71,55 +71,51 @@ class Fragment_Contact : Fragment(), SearchView.OnQueryTextListener {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        id = this.arguments!!.getString("value")
-        email = this.arguments!!.getString("myemail")
-        name = this.arguments!!.getString("name")
-        theid = id
-        if (!id.equals("")) {
+//        id = this.arguments!!.getString("value")
+//        email = this.arguments!!.getString("myemail")
+//        name = this.arguments!!.getString("name")
+        //theid = id
+       // if (!id.equals("")) {
 
             val db = FirebaseFirestore.getInstance()
-                    db.collection("Users")
-                            .orderBy("Username", Query.Direction.DESCENDING)
-                            .addSnapshotListener(object : EventListener<QuerySnapshot> {
+            db.collection("Users")
+                    .orderBy("Username", Query.Direction.DESCENDING)
+                    .addSnapshotListener(object : EventListener<QuerySnapshot> {
 
-                                override fun onEvent(p0: QuerySnapshot?, p1: FirebaseFirestoreException?) {
-                                    if (p1 != null) {
-                                        Log.w("ERROR", "Listen failed.", p1)
-                                        return
+                        override fun onEvent(p0: QuerySnapshot?, p1: FirebaseFirestoreException?) {
+                            if (p1 != null) {
+                                Log.w("ERROR", "Listen failed.", p1)
+                                return
 
 
-                                    }
+                            }
 
-                                    for(doc in p0!!.documents){
-                                        if(doc.getString("Email") != email) {
-                                            var user = doc.toObject(Contacts::class.java)
+                            for (doc in p0!!.documents) {
+                                if (doc.getString("Email") != email) {
+                                    var user = doc.toObject(Contacts::class.java)
 
-                                            user.myid = id
-                                            user.myemail = email
-                                            user.myname = name
-                                            user.userid = doc.id
-                                            con.add(user)
-                                            adapter = AdapterHolder(con, activity!!.applicationContext)
-                                            var layout_manager = LinearLayoutManager(activity!!.applicationContext)
-                                            layout_manager.reverseLayout = false
-                                            recycler.layoutManager = layout_manager
-                                            recycler.setHasFixedSize(true)
+                                    user.myid = id
+                                    user.myemail = email
+                                    user.myname = name
+                                    user.userid = doc.id
+                                    con.add(user)
+                                    adapter = AdapterHolder(con, activity!!.applicationContext)
+                                    var layout_manager = LinearLayoutManager(activity!!.applicationContext)
+                                    layout_manager.reverseLayout = false
+                                    recycler.layoutManager = layout_manager
+                                    recycler.setHasFixedSize(true)
 
-                                            recycler.adapter = adapter
+                                    recycler.adapter = adapter
 
-                                            adapter!!.notifyDataSetChanged()
-                                        }
-                                    }
+                                    adapter!!.notifyDataSetChanged()
                                 }
+                            }
+                        }
 
-                            })
-
-
-
-
+                    })
 
 
-          /*  val db = FirebaseFirestore.getInstance()
+            /*  val db = FirebaseFirestore.getInstance()
             db.collection("Users")
                     .document(id)
 
@@ -156,24 +152,10 @@ class Fragment_Contact : Fragment(), SearchView.OnQueryTextListener {
                     })
 
 */
-        }
+        //}
 
 
     }
-
-
-
-    companion object {
-        var theid = ""
-    }
-
-    override fun onAttach(context: Context?) {
-        super.onAttach(context)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-    }
-
-
 }
+
+

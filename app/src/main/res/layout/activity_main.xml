@@ -13,96 +13,101 @@
 
     <ImageView
         android:id="@+id/logo"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_marginTop="18dp"
+        android:layout_width="162dp"
+        android:layout_height="140dp"
         android:layout_gravity="center"
-        android:layout_marginTop="26dp"
-        app:srcCompat="@drawable/logo" />
+        app:srcCompat="@drawable/logo"
+        tools:layout_editor_absoluteX="111dp"
+        tools:layout_editor_absoluteY="19dp" />
 
 
     <EditText
-        android:layout_marginTop="40dp"
         android:id="@+id/txtEmail"
-        android:layout_width="260dp"
+        android:layout_width="384dp"
+        android:layout_marginTop="50dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:textColorHint="#BDBDBD"
-        android:hint="Email Address"
         android:backgroundTint="#BDBDBD"
+        android:hint="Email Address"
         android:inputType="textEmailAddress"
         android:textAlignment="center"
-        android:textColor="#BDBDBD" />
+        android:textColor="#BDBDBD"
+        android:textColorHint="#BDBDBD"
+        tools:layout_editor_absoluteY="205dp" />
 
     <EditText
         android:id="@+id/txtPass"
-        android:layout_width="260dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginBottom="36dp"
-        android:hint="Password"
+        android:layout_marginTop="25dp"
         android:backgroundTint="#BDBDBD"
-        android:textColorHint="#BDBDBD"
-        android:layout_marginTop="20dp"
+        android:hint="Password"
         android:inputType="textPassword"
         android:textAlignment="center"
-        android:textColor="#BDBDBD" />
+        android:textColor="#BDBDBD"
+        android:textColorHint="#BDBDBD"
+        tools:layout_editor_absoluteY="275dp" />
 
     <ImageButton
-    android:id="@+id/SignIn"
-    android:layout_width="312dp"
-    android:layout_height="53dp"
-    android:layout_gravity="center"
-    android:background="@drawable/roundbutton"
+        android:id="@+id/SignIn"
+        android:layout_width="314dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:background="@drawable/roundbutton"
         android:src="@drawable/smallarrow"
-    />
+        tools:layout_editor_absoluteX="38dp"
+        tools:layout_editor_absoluteY="404dp" />
 
     <Button
         android:id="@+id/create"
-        android:layout_marginTop="10dp"
-        android:layout_width="312dp"
-        android:layout_height="53dp"
+        android:layout_width="314dp"
+        android:layout_height="45dp"
         android:layout_gravity="center"
+        android:layout_marginTop="20dp"
         android:background="@drawable/whiteroundbutton"
         android:text="Create Account"
-        android:textColor="#00A8FE" />
+        android:textColor="#00A8FE"
+        tools:layout_editor_absoluteX="36dp"
+        tools:layout_editor_absoluteY="340dp" />
 
     <LinearLayout
-        android:layout_marginTop="30dp"
+        android:id="@+id/linearLayout"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
         android:layout_gravity="center"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteX="92dp"
+        tools:layout_editor_absoluteY="477dp">
 
         <com.facebook.login.widget.LoginButton
             android:id="@+id/facebooks"
-            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
             android:layout_weight="1"
-            />
+            android:visibility="gone" />
+
 
         <ImageButton
             android:id="@+id/facebook"
             android:layout_width="48dp"
             android:layout_height="48dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:background="#ffffff"
-            android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp"
-            app:srcCompat="@drawable/smallfacebook"
-            />
+            app:srcCompat="@drawable/smallfacebook" />
 
-        <ImageButton
-            android:id="@+id/twitter"
-            android:layout_width="48dp"
+        <com.twitter.sdk.android.core.identity.TwitterLoginButton
+            android:id="@+id/twitters"
+            android:layout_width="42dp"
             android:layout_height="48dp"
-            android:layout_weight="1"
-            android:background="#ffffff"
-            android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp"
-            app:srcCompat="@drawable/smalltwitter"
+            android:layout_weight="1">
 
-            />
+        </com.twitter.sdk.android.core.identity.TwitterLoginButton>
 
         <ImageButton
             android:id="@+id/google"
@@ -116,19 +121,14 @@
     </LinearLayout>
 
     <TextView
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:id="@+id/textView"
         android:layout_width="117dp"
         android:layout_height="17dp"
         android:layout_gravity="center"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
         android:text="Forgot password?"
         android:textColor="#00A8FE"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
+        tools:layout_editor_absoluteX="134dp"
+        tools:layout_editor_absoluteY="538dp" />
 
 </LinearLayout>

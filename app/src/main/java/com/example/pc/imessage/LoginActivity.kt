@@ -16,14 +16,12 @@ import com.google.android.gms.common.api.ApiException
 import android.support.v4.app.FragmentActivity
 import android.util.Log
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import com.google.firebase.auth.FirebaseAuth
 import android.support.design.widget.Snackbar
 
 
-import com.google.firebase.auth.FirebaseUser
-
-import com.google.firebase.auth.AuthResult
 import android.support.annotation.NonNull
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Base64
 import android.widget.Button
 import android.widget.EditText
@@ -33,17 +31,19 @@ import com.example.pc.imessage.FirestoreDatabase.Google_Actions
 import com.facebook.*
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
-import com.google.firebase.auth.GoogleAuthProvider
-import com.google.firebase.auth.AuthCredential
 import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
 import com.facebook.login.widget.LoginButton
 import com.google.android.gms.common.api.Result
+import com.google.firebase.auth.*
 import com.google.firebase.database.*
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
+import com.twitter.sdk.android.core.*
+import com.twitter.sdk.android.core.identity.TwitterLoginButton
+import kotlinx.android.synthetic.main.activity_register.*
 import org.json.JSONObject
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
@@ -52,7 +52,15 @@ import java.util.*
 import javax.security.auth.callback.Callback
 
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : AppCompatActivity(), TextWatcher {
+    override fun afterTextChanged(s: Editable?) {
+    }
+
+    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+    }
+
+    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+    }
 
     lateinit var callback: CallbackManager
 
@@ -66,19 +74,70 @@ class LoginActivity : AppCompatActivity() {
     private var pass: EditText? = null
     private var email: EditText? = null
     private var mAuth: FirebaseAuth? = null
+    //private var client: TwitterAuthClient? = null
+   // private var twitt: TwitterLoginButton ?= null
+    lateinit var loginButton: TwitterLoginButton
     private lateinit var mGoogleSignInClient: GoogleSignInClient
 
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Twitter.initialize(this)
         setContentView(R.layout.activity_main)
         this.pass = findViewById(R.id.txtPass)
         this.email = findViewById(R.id.txtEmail)
-
+        SignIn.isEnabled = false
         callback = CallbackManager.Factory.create()
+        //client = TwitterAuthClient()
+
 
         printKeyHash();
+
+//        var config: TwitterConfig = TwitterConfig.Builder(this)
+//                .logger(DefaultLogger(Log.DEBUG))
+//                .twitterAuthConfig(TwitterAuthConfig(getString(R.string.com_twitter_sdk_android_CONSUMER_KEY), getString(R.string.com_twitter_sdk_android_CONSUMER_SECRET)))
+//                .debug(true)
+//                .build()
+//        Twitter.initialize(config)
+
+//        var twitterLogin: TwitterLoginButton = findViewById(R.id.twitters)
+
+        txtEmail.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(mEdit: Editable) {
+                if(!isValidEmail(txtEmail.text.toString()))
+                    txtEmail.error = "Email not valid"
+            }
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
+        })
+
+        txtPass.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(mEdit: Editable) {
+                if(true)
+                    SignIn.isEnabled=true
+            }
+
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
+        })
+
+        loginButton = findViewById(R.id.twitters) as TwitterLoginButton
+        loginButton.callback = object : com.twitter.sdk.android.core.Callback<TwitterSession>(){
+            override fun success(result: com.twitter.sdk.android.core.Result<TwitterSession>?) {
+                handleTwitterSession(result?.data)
+                var intent: Intent = Intent(this@LoginActivity, ContactList::class.java)
+                startActivity(intent)
+            }
+
+            override fun failure(exception: TwitterException?) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+
+        }
+
 
         var loginButton: LoginButton? = findViewById<LoginButton>(R.id.facebooks)
         loginButton?.setReadPermissions(Arrays.asList("public_profile", "email"))
@@ -106,7 +165,6 @@ class LoginActivity : AppCompatActivity() {
 
         facebook.setOnClickListener(View.OnClickListener {
             LoginManager.getInstance().logInWithReadPermissions(this@LoginActivity, Arrays.asList("public_profile", "email"))
-
         })
 
 
@@ -137,6 +195,27 @@ class LoginActivity : AppCompatActivity() {
         })
     }
 
+
+    private fun handleTwitterSession(session: TwitterSession?) {
+        Log.d(TAG, "handleTwitterSession: $session")
+        val credential =  TwitterAuthProvider.getCredential(session!!.authToken.token, session.authToken.secret)
+
+        mAuth?.signInWithCredential(credential)?.addOnCompleteListener(this) {
+            if (it.isSuccessful) {
+                Log.d(TAG, "signInWithCredential: success")
+                val user = mAuth?.currentUser
+                updateUI(user, null)
+                Toast.makeText(this@LoginActivity, "Authentication succeeded.", Toast.LENGTH_LONG).show()
+            }
+            else {
+                Log.d(TAG, "signInWithCredential: failure", it.exception)
+                Toast.makeText(this@LoginActivity, "Authentication failed.", Toast.LENGTH_LONG).show()
+            }
+        }
+    }
+
+    private fun updateUI(user: FirebaseUser?, account: GoogleSignInAccount?) {}
+
     @SuppressLint("PackageManagerGetSignatures")
     private fun printKeyHash() {
         try {
@@ -161,11 +240,6 @@ firestore_getData()
 
     public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
         callback.onActivityResult(requestCode, resultCode, data)
-
-
-
-
-
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == RC_SIGN_IN) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
@@ -188,6 +262,7 @@ firestore_getData()
             }
 
         }
+            twitters.onActivityResult(requestCode, resultCode, data)
     }
 
     public override fun onStart() {
@@ -203,6 +278,11 @@ firestore_getData()
         user.put("Email", em)
         user.put("Photo_Url", purl)
         db.collection("Users")
+    }
+
+    fun isValidEmail(target: CharSequence?): Boolean {
+        return if (target == null) false
+        else android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches()
     }
 
 
